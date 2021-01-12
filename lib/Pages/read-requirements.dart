@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medical/Components/mydrawer.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ReadReq extends StatefulWidget {
   @override
@@ -8,6 +10,15 @@ class ReadReq extends StatefulWidget {
 }
 
 class _ReadReqState extends State<ReadReq> {
+  Future getData() async {
+    var url = "https://jsonplaceholder.typicode.com/posts";
+    var responce = await http.get(url);
+    var responcebody = jsonDecode(responce.body);
+    return responcebody;
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,70 +33,20 @@ class _ReadReqState extends State<ReadReq> {
         centerTitle: true,
       ),
       //drawer: MyDrawer(),
-      body: ListView(
-        children: [
-          Container(
-            padding: EdgeInsets.only(top: 30.0, left: 10.0),
-            child: Text(
-              "CBC Test",
-              style: TextStyle(fontSize: 30),
-            ),
-          ),
-          Divider(
-            color: Colors.blue,
-          ),
-          Container(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Container(
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-                      Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup company."),
-                      Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-                          Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-                      Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup company."),
-                      Text(
-                          "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              MaterialButton(
-                color: Colors.blue,
-                child: Text(
-                  "search nearest lab",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {},
-              ),
-              ButtonBar(
-                children: [
-                  FlatButton.icon(
-                    icon: Icon(Icons.open_in_new),
-                    label: Text('open in webview'),
-                    onPressed: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+      body: FutureBuilder(
+        future: getData(),
+        
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData){
+            
+               return Container(child: Text(snapshot.data[1]['body'], style: TextStyle(color: Colors.pink, fontSize: 22.0, fontStyle: FontStyle.normal,),));
+              
+          }
+          return CircularProgressIndicator();
+        },
+        
       ),
+      //
 
       //Navigation
       bottomNavigationBar: BottomNavigationBar(
@@ -124,3 +85,4 @@ class _ReadReqState extends State<ReadReq> {
     );
   }
 }
+
