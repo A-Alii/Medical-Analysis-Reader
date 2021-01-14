@@ -7,6 +7,7 @@ import 'package:medical/Pages/know-analysis.dart';
 import 'package:medical/Pages/login.dart';
 import 'package:medical/Pages/nearest-lab.dart';
 import 'package:medical/Pages/scan-anlysis.dart';
+import 'package:medical/Pages/show-analysis-result.dart';
 import 'package:medical/Pages/test.dart';
 import 'package:medical/slider/sliderintro.dart';
 

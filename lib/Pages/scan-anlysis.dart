@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medical/Pages/feedback.dart';
 import 'package:medical/Pages/information-analysis.dart';
 import 'package:medical/Pages/nearest-lab.dart';
+import 'package:medical/Pages/show-analysis-result.dart';
 
 class Scan extends StatefulWidget {
   @override
@@ -156,7 +157,12 @@ class ScanState extends State<Scan> {
               "Go",
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AnalysisResult()),
+                      );
+            },
           ),
         ],
       ),
