@@ -82,25 +82,72 @@ class _LogInState extends State<LogIn> {
     var formdata = formstatesignin.currentState;
     if (formdata.validate()) {
       formdata.save();
-      var data = {"email" : email.text, "password" : password.text};
-      var url = "http://10.0.2.2:8080/medical/login.php";
+      var data = {"User_Email" : email.text, "User_Password" : password.text};
+      var url = "http://10.0.2.2/analysis/login.php";
       var response = await http.post(url, body: data);
       var responcebody = jsonDecode(response.body);
       if(responcebody['status'] == 'success'){
-        print(responcebody['UserName']);
+        showDialog(context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text('login Successfully'),
+        actions: [
+          RaisedButton(color: Colors.blue , onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('Cancel'),)
+        ],
+      ),
+      );
       }
     } else {
-      print("not valid");
+      showDialog(context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error', style: TextStyle(color: Colors.red),),
+        content: Text('Email Or Password Is Error'),
+        actions: [
+          RaisedButton(color: Colors.red[200] , onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('Cancel', style: TextStyle(color: Colors.white),),)
+        ],
+      ),
+      );
     }
   }
 
-  signup() {
+  signup() async{
     var formdata = formstatesignup.currentState;
     if (formdata.validate()) {
-      print("valid");
+      formdata.save();
+      var data = {"User_Email" : email.text, "User_Password" : password.text, "User_Name" : username.text};
+      var url = "http://10.0.2.2/analysis/signup.php";
+      var response = await http.post(url, body: data);
+      var responcebody = jsonDecode(response.body);
+      if(responcebody['status'] == 'success'){
+        showDialog(context: context,
+      builder: (context) => AlertDialog(
+        title: Text('success'),
+        content: Text('signup Successfully'),
+        actions: [
+          RaisedButton(color: Colors.blue , onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('Cancel'),)
+        ],
+      ),
+      );
+      }
     } else {
-      print("not valid");
-    }
+      showDialog(context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error', style: TextStyle(color: Colors.red),),
+        content: Text('this email alredy exisit'),
+        actions: [
+          RaisedButton(color: Colors.red[200] , onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('Cancel', style: TextStyle(color: Colors.white),),)
+        ],
+      ),
+      );
+    } 
   }
 
   TapGestureRecognizer _changesign;
