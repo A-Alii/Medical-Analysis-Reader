@@ -21,10 +21,10 @@ class _ReadReqState extends State<ReadReq> {
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('ID: $value'),
-              Text('UserId: $value2'),
-              Text('Title: $value3'),
-              Text('Body: $value4'),
+              Text('Fedback_Id: $value'),
+              Text('User_Id: $value2'),
+              Text('Feedback_Subject: $value3'),
+              Text('Feedback_Message: $value4'),
               TextButton(
             child: Text('cancel'),
             onPressed: () {
@@ -69,7 +69,7 @@ class _ReadReqState extends State<ReadReq> {
 
 
   Future fetchdata() async {
-    var res = await http.get("https://jsonplaceholder.typicode.com/posts");
+    var res = await http.get("https://jsonfile789.000webhostapp.com/feedback.json");
     if (res.statusCode == 200) {
       var obj = json.decode(res.body);
       return obj;
@@ -100,17 +100,17 @@ class _ReadReqState extends State<ReadReq> {
                 itemBuilder: (_, index) {
                   return ListTile(
                     leading: CircleAvatar(
-                      child: new Text('CBC '),
+                      child: new Text("${snapShot.data[0]['Feedback_Subject']}"),
                       backgroundColor: Colors.pink,
                       foregroundColor: Colors.white,),
-                    title: Text("${snapShot.data[1]['title']}", style: TextStyle(fontSize: 22.0),),
-                    subtitle: Text("${snapShot.data[0]['body']}"),
+                    title: Text("${snapShot.data[0]['Feedback_Subject']}", style: TextStyle(fontSize: 22.0),),
+                    subtitle: Text("${snapShot.data[0]['Feedback_Message']}"),
                     onTap: ()  { showMoreInfo(
                       context, 
-                      '${snapShot.data[1]['id']}',
-                      '${snapShot.data[0]['userId']}',
-                      '${snapShot.data[1]['title']}',
-                      '${snapShot.data[0]['body']}'
+                      '${snapShot.data[0]['Feedback_Id']}',
+                      '${snapShot.data[0]['User_Id']}',
+                      '${snapShot.data[0]['Feedback_Subject']}',
+                      '${snapShot.data[0]['Feedback_Message']}'
                       );}
                   );
                   
