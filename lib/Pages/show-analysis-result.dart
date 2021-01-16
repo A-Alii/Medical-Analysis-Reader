@@ -25,7 +25,7 @@ class _AnalysisResultState extends State<AnalysisResult> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Table",
+            "Test Results",
             textScaleFactor: 2,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -45,7 +45,7 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 Text("172", textScaleFactor: 1.5),
                 IconButton(
                   icon: Icon(
-                    Icons.directions_transit,
+                    Icons.details,
                   ),
                   color: Colors.green,
                   onPressed: () {},
@@ -56,7 +56,8 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 Text("6.3", textScaleFactor: 1.5),
                 IconButton(
                   icon: Icon(
-                    Icons.person_add_disabled,
+                    Icons.dangerous,
+                    color: Colors.red,
                   ),
                   color: Colors.green,
                   onPressed: () {},
@@ -67,7 +68,7 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 Text("200ml", textScaleFactor: 1.5),
                 IconButton(
                   icon: Icon(
-                    Icons.directions_transit,
+                    Icons.details,
                   ),
                   color: Colors.green,
                   onPressed: () {},
@@ -78,15 +79,131 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 Text("Null", textScaleFactor: 1.5),
                 IconButton(
                   icon: Icon(
-                    Icons.directions_transit,
+                    Icons.dangerous,
+                    color: Colors.red,
                   ),
                   color: Colors.green,
                   onPressed: () {},
                 ),
               ]),
+              TableRow(children: [
+                Text(
+                  "Glucos",
+                  textScaleFactor: 1.5,
+                ),
+                Text("172", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.details,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              TableRow(children: [
+                Text("Read Cells", textScaleFactor: 1.5),
+                Text("6.3", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.dangerous,
+                    color: Colors.red,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              TableRow(children: [
+                Text("Voluem", textScaleFactor: 1.5),
+                Text("200ml", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.details,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              TableRow(children: [
+                Text("Byctriec", textScaleFactor: 1.5),
+                Text("Null", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.details,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              TableRow(children: [
+                Text(
+                  "Glucos",
+                  textScaleFactor: 1.5,
+                ),
+                Text("172", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.dangerous,
+                    color: Colors.red,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              TableRow(children: [
+                Text("Read Cells", textScaleFactor: 1.5),
+                Text("6.3", textScaleFactor: 1.5),
+                IconButton(
+                  icon: Icon(
+                    Icons.details,
+                  ),
+                  color: Colors.green,
+                  onPressed: () {},
+                ),
+              ]),
+              
             ],
+            
           ),
+         
         ),
+        Divider(
+          color: Colors.blue,
+          height: 2,
+          endIndent: 40,
+          indent: 40,
+        ),
+
+        Row(
+          children: [
+            Column(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.mic,
+                  ),
+                  color: Colors.green,
+                  iconSize: 30,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            Spacer(),
+            Column(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.speaker_notes,
+                  ),
+                  color: Colors.green,
+                  iconSize: 30,
+                  onPressed: () {},
+                ),
+              ],
+            )
+          ],
+        )
+
+
       ]),
       //Navigation
       bottomNavigationBar: BottomNavigationBar(
