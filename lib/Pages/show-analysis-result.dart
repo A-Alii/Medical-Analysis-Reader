@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medical/Pages/notes-on-anlysis.dart';
 
 class AnalysisResult extends StatefulWidget {
   @override
@@ -193,10 +194,16 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 IconButton(
                   icon: Icon(
                     Icons.speaker_notes,
+
                   ),
                   color: Colors.green,
                   iconSize: 30,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Notes()),
+                    );
+                  },
                 ),
               ],
             )
