@@ -12,85 +12,98 @@ class ReadReq extends StatefulWidget {
 
 class _ReadReqState extends State<ReadReq> {
   Future<void> _launched;
-  Future<void>_launchInWebViewOrVC(String url) async{
-    if(await canLaunch(url)){
+  Future<void> _launchInWebViewOrVC(String url) async {
+    if (await canLaunch(url)) {
       await launch(
         url,
         forceWebView: true,
         forceSafariVC: true,
-        headers: <String, String>{'my_header_key':
-        'my_header_value'},
+        headers: <String, String>{'my_header_key': 'my_header_value'},
       );
-    }else{
+    } else {
       throw 'Could not launch $url';
     }
   }
-  Future<Null> showMoreInfo(BuildContext context, String value, String value2, String value3, String value4) async{
-    
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('$value3'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('Fedback_Id: $value'),
-              Padding(padding: EdgeInsets.only(top: 50)),
-              Text('User_Id: $value2'),
-              Padding(padding: EdgeInsets.only(top: 50)),
-              Text('Feedback_Subject: $value3'),
-              Padding(padding: EdgeInsets.only(top: 50)),
-              Text('Feedback_Message: $value4'),
-              Padding(padding: EdgeInsets.only(top: 50)),
-              TextButton(
-            child: Text('cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-            ],
-          ),
-        ),
-        
-        actions: <Widget>[
-            Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              MaterialButton(
-                color: Colors.blue,
-                child: Text(
-                  "nearest lab",
-                  style: TextStyle(color: Colors.white),
-                ),
-                 onPressed: () {},
-              ),
-                    ButtonBar(
-                children: [
-                  FlatButton.icon(
-                    icon: Icon(Icons.open_in_new),
-                    label: Text('open in webview'),
-                    onPressed: () {
-                      setState(() {
-                        _launched = _launchInWebViewOrVC("https:www.google.com");
-                      });
+
+  Future<Null> showMoreInfo(BuildContext context, String value, String value2,
+      String value3, String value4) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.brown[100],
+          
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Positioned(
+                  right: 0.0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
                     },
-                  )
-                ],
-              ),
-              
-        ],
-      ),
-        ],
-      );
-    },
-  );
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: CircleAvatar(
+                        radius: 18.0,
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.close, color: Colors.red),
+                      ),
+                    ),
+                  ),
+                ),
+                Text('$value3', style: TextStyle(fontSize: 30.0, color: Colors.blue,fontWeight: FontWeight.bold),),
+                Padding(padding: EdgeInsets.only(top: 50)),
+                Text('Fedback_Id: $value'),
+                Padding(padding: EdgeInsets.only(top: 50)),
+                Text('User_Id: $value2'),
+                Padding(padding: EdgeInsets.only(top: 50)),
+                Text('Feedback_Subject: $value3'),
+                Padding(padding: EdgeInsets.only(top: 50)),
+                Text('Feedback_Message: $value4'),
+                Padding(padding: EdgeInsets.only(top: 50)),
+                
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    "nearest lab",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {},
+                ),
+                ButtonBar(
+                  children: [
+                    FlatButton.icon(
+                      icon: Icon(Icons.open_in_new),
+                      label: Text('open in webview'),
+                      onPressed: () {
+                        setState(() {
+                          _launched =
+                              _launchInWebViewOrVC("https:www.google.com");
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 
-
   Future fetchdata() async {
-    var res = await http.get("https://jsonfile789.000webhostapp.com/feedback.json");
+    var res =
+        await http.get("https://jsonfile789.000webhostapp.com/feedback.json");
     if (res.statusCode == 200) {
       var obj = json.decode(res.body);
       return obj;
@@ -120,33 +133,31 @@ class _ReadReqState extends State<ReadReq> {
               return ListView.builder(
                 itemBuilder: (_, index) {
                   return ListTile(
-                    leading: CircleAvatar(
-                      child: new Text("${snapShot.data[0]['Feedback_Subject']}"),
-                      backgroundColor: Colors.pink,
-                      foregroundColor: Colors.white,),
-                    title: Text("${snapShot.data[0]['Feedback_Subject']}", style: TextStyle(fontSize: 22.0),),
-                    subtitle: Text("${snapShot.data[0]['Feedback_Message']}"),
-                    onTap: ()  { showMoreInfo(
-                      context, 
-                      '${snapShot.data[0]['Feedback_Id']}',
-                      '${snapShot.data[0]['User_Id']}',
-                      '${snapShot.data[0]['Feedback_Subject']}',
-                      '${snapShot.data[0]['Feedback_Message']}'
-                      );}
-                  );
-                  
+                      leading: CircleAvatar(
+                        child:
+                            new Text("${snapShot.data[0]['Feedback_Subject']}"),
+                        backgroundColor: Colors.pink,
+                        foregroundColor: Colors.white,
+                      ),
+                      title: Text(
+                        "${snapShot.data[0]['Feedback_Subject']}",
+                        style: TextStyle(fontSize: 22.0),
+                      ),
+                      subtitle: Text("${snapShot.data[0]['Feedback_Message']}"),
+                      onTap: () {
+                        showMoreInfo(
+                            context,
+                            '${snapShot.data[0]['Feedback_Id']}',
+                            '${snapShot.data[0]['User_Id']}',
+                            '${snapShot.data[0]['Feedback_Subject']}',
+                            '${snapShot.data[0]['Feedback_Message']}');
+                      });
                 },
                 itemCount: 1,
               );
-              
             }
-            
           },
         ),
-
-        
-        
-        
 
         // children: [
         //   Container(
@@ -185,14 +196,11 @@ class _ReadReqState extends State<ReadReq> {
         //       ],
         //     ),
         //   ),
-        
-        
+
         //     ],
         //   ),
         // ],
       ),
-      
     );
-    
   }
 }
