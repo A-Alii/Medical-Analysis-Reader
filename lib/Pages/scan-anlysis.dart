@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medical/Components/mydrawer.dart';
-import 'package:medical/Components/mynavigation.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,9 +52,9 @@ class ScanState extends State<Scan> {
           maxHeight: 700,
           compressFormat: ImageCompressFormat.jpg,
           androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
+            toolbarColor: Colors.blue[200],
+            toolbarTitle: "Crop Image",
+            statusBarColor: Colors.blue.shade900,
             backgroundColor: Colors.white,
           ));
 
@@ -148,8 +146,12 @@ class ScanState extends State<Scan> {
               new Text("Take A photo")
             ],
           ),
+          Padding(padding: EdgeInsets.only(top: 20)),
           Divider(
             color: Colors.blue,
+            endIndent: 40,
+            height: 50,
+            indent: 40,
           ),
           MaterialButton(
             color: Colors.blue,
@@ -190,7 +192,7 @@ class ScanState extends State<Scan> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.bar_chart,
+              Icons.camera_alt,
             ),
             title: Text('Scan'),
             backgroundColor: Colors.blue,

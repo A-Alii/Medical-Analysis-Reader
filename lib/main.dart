@@ -4,11 +4,8 @@ import 'package:medical/Pages/compare-analysis.dart';
 import 'package:medical/Pages/feedback.dart';
 import 'package:medical/Pages/information-analysis.dart';
 import 'package:medical/Pages/know-analysis.dart';
-import 'package:medical/Pages/login.dart';
 import 'package:medical/Pages/nearest-lab.dart';
 import 'package:medical/Pages/scan-anlysis.dart';
-import 'package:medical/Pages/show-analysis-result.dart';
-import 'package:medical/Pages/test.dart';
 import 'package:medical/slider/sliderintro.dart';
 
 void main() => runApp(MyApp());

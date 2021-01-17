@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../Pages/edit.dart';
+import '../slider/sliderintro.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -10,13 +12,17 @@ class MyDrawer extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountEmail: Text('ahmedali@gmail.com'),
             accountName: Text('Ahmed Ali'),
-            currentAccountPicture: CircleAvatar(child: Icon(Icons.person)),
+            currentAccountPicture: CircleAvatar(child: Icon(Icons.person_outline , size: 40,color: Colors.blue[500],),
+            backgroundColor: Colors.deepOrange.shade50,
+            ),
+            
             decoration: BoxDecoration(
                 color: Colors.red,
                 image: DecorationImage(
-                    image: AssetImage("images/medical.jpg"),
+                    image: AssetImage("images/ggh.jpg"),
                     fit: BoxFit.cover)),
           ),
+          
           ListTile(
             title: Text("Scan Analysis", style: TextStyle(color: Colors.black)),
             leading: Icon(
@@ -82,6 +88,10 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(
             color: Colors.blue,
+            endIndent: 48,
+            thickness: 1.2,
+            height: 20,
+            indent: 48,
           ),
           ListTile(
             title: Text("About Us", style: TextStyle(color: Colors.black)),
@@ -94,12 +104,30 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            title: Text("Edit Profile", style: TextStyle(color: Colors.black)),
+            leading: Icon(
+              Icons.edit,
+              color: Colors.blue,
+            ),
+            onTap: () {
+              Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Edit()),
+                      );
+            },
+          ),
+          ListTile(
             title: Text("Log Of", style: TextStyle(color: Colors.black)),
             leading: Icon(
               Icons.logout,
               color: Colors.blue,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SliderIntro()),
+                      );
+            },
           ),
         ],
       ),
