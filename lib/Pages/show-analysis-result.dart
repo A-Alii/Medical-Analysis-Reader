@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medical/Pages/notes-on-anlysis.dart';
+import 'package:medical/Pages/notes-on-analysis.dart';
 
 class AnalysisResult extends StatefulWidget {
   @override
@@ -161,11 +161,8 @@ class _AnalysisResultState extends State<AnalysisResult> {
                   onPressed: () {},
                 ),
               ]),
-              
             ],
-            
           ),
-         
         ),
         Divider(
           color: Colors.blue,
@@ -173,7 +170,6 @@ class _AnalysisResultState extends State<AnalysisResult> {
           endIndent: 40,
           indent: 40,
         ),
-
         Row(
           children: [
             Column(
@@ -194,7 +190,6 @@ class _AnalysisResultState extends State<AnalysisResult> {
                 IconButton(
                   icon: Icon(
                     Icons.speaker_notes,
-
                   ),
                   color: Colors.green,
                   iconSize: 30,
@@ -209,8 +204,6 @@ class _AnalysisResultState extends State<AnalysisResult> {
             )
           ],
         )
-
-
       ]),
       //Navigation
       bottomNavigationBar: BottomNavigationBar(

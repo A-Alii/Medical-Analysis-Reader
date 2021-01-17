@@ -23,49 +23,32 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Medical Analysis',
       theme: ThemeData(
-        textTheme: TextTheme(
-          headline3: TextStyle(color: Colors.blue)
-        )
-      ),
+          textTheme: TextTheme(headline3: TextStyle(color: Colors.blue))),
       //initial route
       home: SliderIntro(),
       routes: {
-        'Scan' : (context) {
+        'Scan': (context) {
           return Scan();
         },
-
-        'About' : (context) {
+        'About': (context) {
           return About();
         },
-
-        'Nearest' : (context) {
+        'Nearest': (context) {
           return Nearest();
         },
-
-        'Compare' : (context) {
+        'Compare': (context) {
           return Compare();
         },
-
-        'Information' : (context) {
+        'Information': (context) {
           return Information();
         },
-
-        'Feedback' : (context) {
+        'Feedback': (context) {
           return Feedback1();
         },
-
-        'Know' : (context) {
+        'Know': (context) {
           return Know();
         },
-
-
-
-        
-
       },
-
-      
-
       // End Project
     );
   }
