@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:medical/Pages/search-field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReadReq extends StatefulWidget {
@@ -132,74 +133,68 @@ class _ReadReqState extends State<ReadReq> {
             } else {
               return ListView.builder(
                 itemBuilder: (_, index) {
-                  return ListTile(
-                      leading: CircleAvatar(
-                        child:
-                            new Text("${snapShot.data[0]['Feedback_Subject']}"),
-                        backgroundColor: Colors.pink,
-                        foregroundColor: Colors.white,
-                      ),
-                      title: Text(
+                  return Column(
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 15.0)),
+                      Text(
                         "${snapShot.data[0]['Feedback_Subject']}",
-                        style: TextStyle(fontSize: 22.0),
+                        style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold,),
                       ),
-                      subtitle: Text("${snapShot.data[0]['Feedback_Message']}"),
-                      onTap: () {
-                        showMoreInfo(
-                            context,
-                            '${snapShot.data[0]['Feedback_Id']}',
-                            '${snapShot.data[0]['User_Id']}',
-                            '${snapShot.data[0]['Feedback_Subject']}',
-                            '${snapShot.data[0]['Feedback_Message']}');
-                      });
+                      Divider(
+                        endIndent: 40,
+                        indent: 40,
+                        height: 20,
+                        thickness: 1.2,
+                        color: Colors.blue,
+                      ),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.all(15.0),
+                          child: Text(
+                          "${snapShot.data[0]['Feedback_Message']}",
+                          style: TextStyle(fontSize: 22.0,),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Row(
+                          children: [
+                            Padding(padding: EdgeInsets.only(left: 60.0,top: 300.0)),
+                            MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    "nearest lab",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {},
+                ),
+                ButtonBar(
+                  children: [
+                    FlatButton.icon(
+                      icon: Icon(Icons.open_in_new),
+                      label: Text('open in webview'),
+                      onPressed: () {
+                        setState(() {
+                          _launched =
+                              _launchInWebViewOrVC("https:www.google.com");
+                        });
+                      },
+                    ),
+                  ],
+                ),
+
+                          ],
+                        ),
+                      ),
+                    ],
+                      // 
+                      );
                 },
                 itemCount: 1,
               );
             }
           },
         ),
-
-        // children: [
-        //   Container(
-        //     padding: EdgeInsets.only(top: 30.0, left: 10.0),
-        //     child: Text(
-        //       "CBC Test",
-        //       style: TextStyle(fontSize: 30),
-        //     ),
-        //   ),
-        //   Divider(
-        //     color: Colors.blue,
-        //   ),
-        //   Container(
-        //     padding: EdgeInsets.all(20.0),
-        //     child: Column(
-        //       children: [
-        //         Container(
-        //           color: Colors.white,
-        //           child: Column(
-        //             children: [
-        //               Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-        //               Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup company."),
-        //               Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-        //                   Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-        //               Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup company."),
-        //               Text(
-        //                   "About  page in flutter About  page in flutter M.A.R About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter About  page in flutter bla ahmed lsjjd jf simple app that generates proposed names for a startup."),
-        //             ],
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-
-        //     ],
-        //   ),
-        // ],
       ),
     );
   }
