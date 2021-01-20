@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:medical/Components/mydrawer.dart';
+import 'package:medical/Pages/nearest-lab.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Information extends StatefulWidget {
   @override
@@ -62,12 +64,45 @@ class _Informationtate extends State<Information> {
                       ),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       Text('$value4'),
+                      
                     ],
                   ),
                 ),
               ],
+              
             ),
           ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    "nearest lab",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Nearest()));
+                  },
+                ),
+                ButtonBar(
+                  children: [
+                    FlatButton.icon(
+                      icon: Icon(Icons.open_in_new),
+                      label: Text('open in webview'),
+                      onPressed: () {
+                        setState(() {
+                          _launched =
+                              _launchInWebViewOrVC("https:www.google.com");
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
         );
       },
     );
@@ -104,7 +139,19 @@ bool isSearching = false;
     });
 }
 
-
+Future<void> _launched;
+  Future<void> _launchInWebViewOrVC(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceWebView: true,
+        forceSafariVC: true,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
 
 

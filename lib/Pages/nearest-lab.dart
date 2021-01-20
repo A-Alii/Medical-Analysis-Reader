@@ -23,7 +23,7 @@ class _NearestState extends State<Nearest> {
         title: Text("Nearest Lab"),
         centerTitle: true,
       ),
-      drawer: MyDrawer(),
+      //drawer: MyDrawer(),
       body: Container(
         child: Text("Nearest Lab"),
       ),
