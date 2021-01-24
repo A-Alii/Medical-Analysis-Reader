@@ -7,6 +7,7 @@ import 'package:medical/Pages/know-analysis.dart';
 import 'package:medical/Pages/nearest-lab.dart';
 import 'package:medical/Pages/scan-anlysis.dart';
 import 'package:medical/slider/sliderintro.dart';
+import 'package:medical/Pages/forget-password.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,11 +40,15 @@ class MyApp extends StatelessWidget {
         'Information': (context) {
           return Information();
         },
+    'Forget': (context) {
+    return ForgetPassword();},
+
         'Feedback': (context) {
           return Feedback1();
         },
         'Know': (context) {
           return Know();
+
         },
       },
       // End Project

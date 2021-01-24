@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medical/Components/mydrawer.dart';
 
-//import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:search_map_place/search_map_place.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+//  import 'package:search_map_place/search_map_place.dart';
 import 'package:url_launcher/url_launcher.dart';
 class Nearest extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class _NearestState extends State<Nearest> {
   }
 
    openurl() async{
-    const url1 ='https://www.google.com/maps/search/?api=1&query=medical+labs';
+    const url1 ='https://www.google.com/maps/search/?api=1&query=medical+laboratory';
     if (await canLaunch(url1)) {
       await launch(url1);
     } else {

@@ -245,7 +245,7 @@ class _LogInState extends State<LogIn> {
                           children: [
                             showsignin
                                 ? InkWell(
-                                    onTap: () {},
+                                    onTap: () {Navigator.of(context).pushNamed('Forget');},
                                     child: Text("Forgot Password",
                                         style: TextStyle(
                                           color: Colors.blue,

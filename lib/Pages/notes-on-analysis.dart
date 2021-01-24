@@ -129,6 +129,7 @@ List<Vehicle> vehicles = [
     ['Body 1'],
     Icons.volume_up,
     ),
+
   new Vehicle(
     'Haemoglobin',
     ['Body 3'],

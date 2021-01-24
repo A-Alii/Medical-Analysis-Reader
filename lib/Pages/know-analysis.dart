@@ -18,6 +18,37 @@ class Know extends StatefulWidget {
 }
 
 class _KnowState extends State<Know> {
+  Map<String, bool> numbers = {
+    'One': false,
+    'Two': false,
+    'Three': false,
+    'Four': false,
+    'Five': false,
+    'Six': false,
+    'Seven': false,
+    'w': false,
+    'Twdwo': false,
+    'wd': false,
+    'wd': false,
+    'qa': false,
+    'Sixqwf': false,
+    'wd': false,
+  };
+  var holder_1 = [];
+  getItems() {
+    numbers.forEach((key, value) {
+      if (value == true) {
+        holder_1.add(key);
+      }
+    });
+
+    // Printing all selected items on Terminal screen.
+    print(holder_1);
+    // Here you will get all your selected Checkbox items.
+
+    // Clear array after use.
+    holder_1.clear();
+  }
   //  final allowNotifications = NotificationSetting(title: 'all Notifications');
 
   // final notifications = [
@@ -28,6 +59,7 @@ class _KnowState extends State<Know> {
   @override
   Widget build(BuildContext context) {
     var mdw = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
           actions: <Widget>[
@@ -40,6 +72,67 @@ class _KnowState extends State<Know> {
           centerTitle: true,
         ),
         drawer: MyDrawer(),
+        body: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 20, bottom: 20),
+              child: new Row(
+                children: [
+                  Container(
+                    child: FlatButton(
+                        onPressed: () => {}, child: Icon(Icons.search)),
+                  ),
+                  Container(
+                    height: 50,
+                    width: 250,
+                    child: new TextField(
+                      autocorrect: true,
+                      autofocus: true,
+                      keyboardType: TextInputType.text,
+                      decoration: new InputDecoration(
+                        labelText: 'Search',
+                        hintText: 'enter your diseas ',
+                        border: new OutlineInputBorder(
+                            //borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                            borderSide: BorderSide(
+                                color: Colors.white) //This is Ignored,
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: numbers.keys.map((String key) {
+                  return new CheckboxListTile(
+                    title: new Text(key),
+                    value: numbers[key],
+                    activeColor: Colors.black,
+                    checkColor: Colors.white,
+                    onChanged: (bool value) {
+                      setState(() {
+                        numbers[key] = value;
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+            RaisedButton(
+              child: Text(
+                " Submit ",
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: getItems,
+              color: Colors.green,
+              textColor: Colors.white,
+              splashColor: Colors.grey,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            ),
+          ],
+        ),
 
         //      body: ListView(
         //         children: [
@@ -95,21 +188,23 @@ class _KnowState extends State<Know> {
         //         notification.title,
         //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         //       ),
-        //     );
-        body: Container(
-          child: Center(
-            child: MyButton(
-              title: "Read Requirements",
-              function: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ReadReq()),
-                );
-              },
-              mdw: mdw,
-            ),
-          ),
-        ),
+        // //     );
+
+        //POPUP
+        // body: Container(
+        //   child: Center(
+        //     child: MyButton(
+        //       title: "Read Requirements",
+        //       function: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => ReadReq()),
+        //         );
+        //       },
+        //       mdw: mdw,
+        //     ),
+        //   ),
+        // ),
         //Navigation
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
