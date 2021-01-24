@@ -162,7 +162,7 @@ class ScanState extends State<Scan> {
             onPressed: () {
               Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AnalysisResult()),
+                        MaterialPageRoute(builder: (context) => AnalysisResult(), fullscreenDialog: true),
                       );
             },
           ),
