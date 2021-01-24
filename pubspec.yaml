@@ -32,6 +32,7 @@ dependencies:
   dio: ^3.0.10
   flutter_svg: ^0.18.0
   flip_card: ^0.4.4
+  shared_preferences: ^0.5.12+4
   
   flutter:
     sdk: flutter
