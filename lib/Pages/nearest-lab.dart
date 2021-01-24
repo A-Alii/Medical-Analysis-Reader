@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medical/Components/mydrawer.dart';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:search_map_place/search_map_place.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:search_map_place/search_map_place.dart';
 import 'package:url_launcher/url_launcher.dart';
 class Nearest extends StatefulWidget {
   @override
