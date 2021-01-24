@@ -1,28 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:medical/Pages/login.dart';
 import '../Pages/edit.dart';
 import '../slider/sliderintro.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
+  MyDrawer({Key key}) : super(key: key);
+
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  var username;
+  var email;
+  bool isSignIn = false;
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    username = preferences.getString("username");
+    email = preferences.getString("email");
+
+    if (username != null) {
+      setState(() {
+        username = preferences.getString("username");
+        email = preferences.getString("email");
+        isSignIn = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getPref();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Drawer(
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountEmail: Text('ahmedali@gmail.com'),
-            accountName: Text('Ahmed Ali'),
-            currentAccountPicture: CircleAvatar(child: Icon(Icons.person_outline , size: 40,color: Colors.blue[500],),
-            backgroundColor: Colors.deepOrange.shade50,
+            accountEmail: isSignIn ? Text(email) : Text(""),
+            accountName: isSignIn ? Text(username) : Text(""),
+            currentAccountPicture: CircleAvatar(
+              child: Icon(
+                Icons.person_outline,
+                size: 40,
+                color: Colors.blue[500],
+              ),
+              backgroundColor: Colors.deepOrange.shade50,
             ),
-            
             decoration: BoxDecoration(
                 color: Colors.red,
                 image: DecorationImage(
-                    image: AssetImage("images/ggh.jpg"),
-                    fit: BoxFit.cover)),
+                    image: AssetImage("images/ggh.jpg"), fit: BoxFit.cover)),
           ),
-          
           ListTile(
             title: Text("Scan Analysis", style: TextStyle(color: Colors.black)),
             leading: Icon(
@@ -111,28 +146,60 @@ class MyDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Edit()),
-                      );
+                context,
+                MaterialPageRoute(builder: (context) => Edit()),
+              );
             },
           ),
-          ListTile(
-            title: Text("Log Of", style: TextStyle(color: Colors.black)),
-            leading: Icon(
-              Icons.logout,
-              color: Colors.blue,
-            ),
-            onTap: () {
-              Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SliderIntro()),
-                      );
-            },
-          ),
+          isSignIn
+              ? ListTile(
+                  title: Text("Log Of", style: TextStyle(color: Colors.black)),
+                  leading: Icon(
+                    Icons.logout,
+                    color: Colors.blue,
+                  ),
+                  onTap: () async {
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    preferences.remove("username");
+                    preferences.remove("email");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LogIn()),
+                    );
+                  },
+                )
+              : ListTile(
+                  title: Text("Log In", style: TextStyle(color: Colors.black)),
+                  leading: Icon(
+                    Icons.login,
+                    color: Colors.blue,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LogIn()),
+                    );
+                  },
+                ),
         ],
       ),
     );
+
     // endDrawer for Arabic
     //endDrawer: Drawer(),
   }
+
+/*
+    
+ */
+
+/*class MyDrawer extends StatelessWidget {
+  var username ;
+  var email ;
+  @override
+  Widget build(BuildContext context) {
+
+  }
+}*/
 }

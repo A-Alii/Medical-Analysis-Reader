@@ -37,7 +37,7 @@ class _SliderIntroState extends State<SliderIntro> {
               height: 40,
             ),
             Expanded(
-                flex: 2,
+                flex: 3,
                 child: PageView.builder(
                   onPageChanged: (val) {
                     setState(() {

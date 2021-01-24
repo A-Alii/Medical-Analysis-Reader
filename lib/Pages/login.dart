@@ -2,27 +2,81 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   @override
   _LogInState createState() => _LogInState();
 }
 
+showloading(context) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Row(
+            children: [Text("Loading....."), CircularProgressIndicator()],
+          ),
+        );
+      });
+}
+
+showdialogall(context, String mytitle, String mycontent) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(mytitle),
+          content: Text(mycontent),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Done",
+                  style: TextStyle(color: Colors.blue),
+                )),
+          ],
+        );
+      });
+}
+
 class _LogInState extends State<LogIn> {
-
-  Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
+  Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  bool isLoading = false;
   // Start Form Controller
+
+
 
   TextEditingController username = new TextEditingController();
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController confirmpassword = new TextEditingController();
-
   GlobalKey<FormState> formstatesignin = new GlobalKey<FormState>();
   GlobalKey<FormState> formstatesignup = new GlobalKey<FormState>();
+
+
+
+
+  savePref(String username, String email) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("username", username);
+    preferences.setString("email", email);
+    print(preferences.getString("username"));
+    print(preferences.getString("email"));
+  }
+
+
+
+
+
+
+
+
+
+
 
   String validglobal(String val) {
     if (val.isEmpty) {
@@ -77,76 +131,62 @@ class _LogInState extends State<LogIn> {
     }
   }
 
+
+
+
+
+
+
+
+
   signin() async {
     var formdata = formstatesignin.currentState;
     if (formdata.validate()) {
       formdata.save();
-      var data = {"User_Email" : email.text, "User_Password" : password.text};
-      var url = "http://10.0.2.2/analysis/login.php";
+
+      
+      showloading(context);
+      var data = {"email": email.text, "password": password.text};
+      var url = "http://10.0.2.2/medical/login.php";
       var response = await http.post(url, body: data);
       var responcebody = jsonDecode(response.body);
-      if(responcebody['status'] == 'success'){
-        showDialog(context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text('login Successfully'),
-        actions: [
-          RaisedButton(color: Colors.blue , onPressed: (){
-            Navigator.pop(context);
-          }, child: Text('Cancel'),)
-        ],
-      ),
-      );
+      if (responcebody['status'] == 'success') {
+        savePref(responcebody['username'], responcebody['email']);
+        Navigator.of(context).pushNamed("Scan");
+      } else {
+        print("Login Faild ");
+        //Navigator.of(context).pop();
+        showdialogall(context, "Error!", "Email Or Password Invalid");
       }
     } else {
-      showDialog(context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error', style: TextStyle(color: Colors.red),),
-        content: Text('Email Or Password Is Error'),
-        actions: [
-          RaisedButton(color: Colors.red[200] , onPressed: (){
-            Navigator.pop(context);
-          }, child: Text('Cancel', style: TextStyle(color: Colors.white),),)
-        ],
-      ),
-      );
+      print("not valid");
     }
   }
 
-  signup() async{
+  signup() async {
     var formdata = formstatesignup.currentState;
     if (formdata.validate()) {
       formdata.save();
-      var data = {"User_Email" : email.text, "User_Password" : password.text, "User_Name" : username.text};
-      var url = "http://10.0.2.2/analysis/signup.php";
+      showloading(context);
+      var data = {
+        "email": email.text,
+        "password": password.text,
+        "username": username.text
+      };
+      var url = "http://10.0.2.2/medical/signup.php";
       var response = await http.post(url, body: data);
       var responcebody = jsonDecode(response.body);
-      if(responcebody['status'] == 'success'){
-        showDialog(context: context,
-      builder: (context) => AlertDialog(
-        title: Text('success'),
-        content: Text('signup Successfully'),
-        actions: [
-          RaisedButton(color: Colors.blue , onPressed: (){
-            Navigator.pop(context);
-          }, child: Text('Cancel'),)
-        ],
-      ),
-      );
+      if (responcebody['status'] == 'success') {
+        print("success");
+        Navigator.of(context).pushNamed("Scan");
+      } else {
+        print(responcebody['status']);
+        Navigator.of(context).pop();
+        showdialogall(context, "Error!", "Email Is Exist");
       }
     } else {
-      showDialog(context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error', style: TextStyle(color: Colors.red),),
-        content: Text('this email alredy exisit'),
-        actions: [
-          RaisedButton(color: Colors.red[200] , onPressed: (){
-            Navigator.pop(context);
-          }, child: Text('Cancel', style: TextStyle(color: Colors.white),),)
-        ],
-      ),
-      );
-    } 
+      print("not valid");
+    }
   }
 
   TapGestureRecognizer _changesign;
@@ -170,7 +210,6 @@ class _LogInState extends State<LogIn> {
 
     return Container(
       child: Scaffold(
-        
         body: Stack(
           children: [
             Container(height: double.infinity, width: double.infinity),
@@ -432,19 +471,26 @@ class _LogInState extends State<LogIn> {
           BoxShadow(color: Colors.grey, blurRadius: 30, spreadRadius: 10)
         ],
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: 25,
-            left: 25,
-            child: Icon(Icons.person_outline, size: 50, color: Colors.white),
-          ),
-          Positioned(
-            top: 35,
-            left: 60,
-            child: Icon(Icons.arrow_forward, size: 30, color: Colors.white),
-          )
-        ],
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            showsignin = !showsignin;
+          });
+        },
+        child: Stack(
+          children: [
+            Positioned(
+              top: 25,
+              left: 25,
+              child: Icon(Icons.person_outline, size: 50, color: Colors.white),
+            ),
+            Positioned(
+              top: 35,
+              left: 60,
+              child: Icon(Icons.arrow_forward, size: 30, color: Colors.white),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -488,4 +534,3 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
-

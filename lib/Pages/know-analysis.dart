@@ -103,7 +103,7 @@ class _KnowState extends State<Know> {
               function: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReadReq(), fullscreenDialog: true),
+                  MaterialPageRoute(builder: (context) => ReadReq()),
                 );
               },
               mdw: mdw,

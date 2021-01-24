@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
 class Test extends StatefulWidget {
   @override
@@ -11,11 +9,10 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   Future getData() async {
-    var url = "https://jsonplaceholder.typicode.com/posts";
+    var url = "http://10.0.2.2/analysis/users.php";
     var responce = await http.get(url);
     var responcebody = jsonDecode(responce.body);
     return responcebody;
-
   }
 
   @override
@@ -25,18 +22,23 @@ class _TestState extends State<Test> {
         title: Text("TestState"),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: getData(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData){
-            return ListView.builder(itemCount: snapshot.data.length, itemBuilder: (context , i){
-                return Container(child: Text(snapshot.data[i]['title']),);
-              });
-          }
-          return CircularProgressIndicator();
-        },
+      body: Center(
+        child: FutureBuilder(
+          future: getData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, i) {
+                    return Container(
+                      child: Text(snapshot.data[i]['username']),
+                    );
+                  });
+            }
+            return CircularProgressIndicator();
+          },
+        ),
       ),
-
     );
   }
 }
