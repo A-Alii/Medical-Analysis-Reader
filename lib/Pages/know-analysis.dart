@@ -49,6 +49,28 @@ class _KnowState extends State<Know> {
     // Clear array after use.
     holder_1.clear();
   }
+
+  showdialogall(context, String mytitle, String mycontent) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(mytitle),
+            content: Text(mycontent),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "Done",
+                    style: TextStyle(color: Colors.blue),
+                  )),
+            ],
+          );
+        });
+  }
+
   //  final allowNotifications = NotificationSetting(title: 'all Notifications');
 
   // final notifications = [
@@ -62,12 +84,6 @@ class _KnowState extends State<Know> {
 
     return Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
           title: Text("Know Your Analysis"),
           centerTitle: true,
         ),
@@ -87,7 +103,7 @@ class _KnowState extends State<Know> {
                     width: 250,
                     child: new TextField(
                       autocorrect: true,
-                      autofocus: true,
+                      autofocus: false,
                       keyboardType: TextInputType.text,
                       decoration: new InputDecoration(
                         labelText: 'Search',
@@ -125,8 +141,8 @@ class _KnowState extends State<Know> {
                 " Submit ",
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: getItems,
-              color: Colors.green,
+              onPressed: showdialogall(context, "Result !", "CBC Test"),
+              color: Colors.blue,
               textColor: Colors.white,
               splashColor: Colors.grey,
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),

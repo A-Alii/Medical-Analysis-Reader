@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical/Pages/login.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Pages/edit.dart';
 import '../slider/sliderintro.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,7 +76,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).pushNamed('Nearest');
+              openurl();
             },
           ),
           ListTile(
@@ -202,4 +203,14 @@ class _MyDrawerState extends State<MyDrawer> {
 
   }
 }*/
+}
+
+openurl() async {
+  const url1 =
+      'https://www.google.com/maps/search/?api=1&query=medical+laboratory';
+  if (await canLaunch(url1)) {
+    await launch(url1);
+  } else {
+    throw 'Could not launch $url1';
+  }
 }
