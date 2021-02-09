@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medical/Components/mydrawer.dart';
+import 'package:medical/Pages/charts/Compare_Analysis_charts.dart';
 import 'package:medical/Pages/compare_files/Analysis.dart';
 import 'package:medical/Pages/compare_files/MultiSelectionExample.dart';
 import 'package:medical/Pages/compare_files/SingleSelectionExample.dart';
 
 class Compare extends StatefulWidget {
-  
   @override
   _CompareState createState() => _CompareState();
 }
@@ -85,13 +85,34 @@ class _CompareState extends State<Compare> {
       ),
     );
   }
+
   void openDialog() {
     showDialog(
         context: context,
         builder: (ctx) {
           return AlertDialog(
             title: Text('List'),
-            actions: <Widget>[Text('OK'), Text('Cancel')],
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CompareAnalysisCharts()),
+                  );
+                },
+                child: Text(
+                  "Next",
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  SingleSelectionExample(sortFilter);
+                },
+                child: Text(
+                  "Cancel",
+                ),
+              ),
+            ],
             content: Container(
                 width: 300,
                 height: 400,
@@ -100,4 +121,3 @@ class _CompareState extends State<Compare> {
         });
   }
 }
-

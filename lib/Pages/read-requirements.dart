@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:medical/Components/mydrawer.dart';
 import 'package:medical/Pages/nearest-lab.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,10 +41,10 @@ class _ReadReqState extends State<ReadReq> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(
+          /*IconButton(
             icon: Icon(Icons.search),
             onPressed: () {},
-          )
+          )*/
         ],
         title: Text("Requirements"),
         centerTitle: true,
@@ -83,7 +84,7 @@ class _ReadReqState extends State<ReadReq> {
                       Center(
                         child: Row(
                           children: [
-                            Padding(padding: EdgeInsets.only(left: 60.0,top: 300.0)),
+                            Padding(padding: EdgeInsets.only(left: 60.0,top: 100.0)),
                             MaterialButton(
                   color: Colors.blue,
                   child: Text(
@@ -91,7 +92,7 @@ class _ReadReqState extends State<ReadReq> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Nearest()));
+                    openurl();
                   },
                 ),
                 ButtonBar(

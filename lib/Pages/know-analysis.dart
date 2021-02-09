@@ -58,12 +58,15 @@ class _KnowState extends State<Know> {
             title: Text(mytitle),
             content: Text(mycontent),
             actions: [
-              FlatButton(
+              RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReadReq()),
+                    );
                   },
                   child: Text(
-                    "Done",
+                    "Read Requirements",
                     style: TextStyle(color: Colors.blue),
                   )),
             ],
@@ -141,7 +144,10 @@ class _KnowState extends State<Know> {
                 " Submit ",
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: showdialogall(context, "Result !", "CBC Test"),
+              onPressed: (){
+                showdialogall(context, "Result !", "CBC Test");
+              },
+              // onPressed: showdialogall(context, "Result !", "CBC Test"),
               color: Colors.blue,
               textColor: Colors.white,
               splashColor: Colors.grey,
@@ -254,7 +260,8 @@ class _KnowState extends State<Know> {
               backgroundColor: Colors.blue,
             ),
           ],
-        ));
+        ),
+    );
   }
 }
 
