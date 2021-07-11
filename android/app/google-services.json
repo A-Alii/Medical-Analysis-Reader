@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "416056710251",
+    "project_id": "scan-your-analysis",
+    "storage_bucket": "scan-your-analysis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416056710251:android:70fbf227dbebd24f0bcd2e",
+        "android_client_info": {
+          "package_name": "com.example.mar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416056710251-jom4gi1nkpd8lenmc0dsgcoa44u82vke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkoGJArnndpDj7car-yDTiMuCfc3IT194"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416056710251-jom4gi1nkpd8lenmc0dsgcoa44u82vke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
